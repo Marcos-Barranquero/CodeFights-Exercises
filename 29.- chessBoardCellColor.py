@@ -25,35 +25,30 @@ def both_odd(n1, n2):
     return n1 % 2 != 0 and n2 % 2 != 0
 
 
-def is_color(n1, n2):
+def is_color(cell):
     "Returns true if the cell is colored, false otherwise."
-    return both_even(n1, n2) or both_odd(n1, n2)
+    return both_even(cell[0], cell[1]) or both_odd(cell[0], cell[1])
 
 
 def turn_letter_to_number(letter):
     """
     Turns the letter received into its position of the alphabet:
-    A -> 1
-    B -> 2
-    ...
     """
     letters = "ABCDEFGH"
     return letters.index(letter) + 1
 
 
 def chessBoardCellColor(cell1, cell2):
-    c1 = list(cell1)
-    c2 = list(cell2)
-    c1[1] = int(c1[1])
-    c2[1] = int(c2[1])
-    c1_color = is_color(turn_letter_to_number(c1[0]), c1[1])
-    c2_color = is_color(turn_letter_to_number(c2[0]), c2[1])
-    return c1_color == c2_color
+    """
+    Given two cells on the standard chess board, determine whether
+    they have the same color or not.
+    """
+    c1 = [turn_letter_to_number(cell1[0]), int(cell1[1])]
+    c2 = [turn_letter_to_number(cell2[0]), int(cell2[1])]
+    return is_color(c1) == is_color(c2)
+
+# @ Tests:
 
 
 if __name__ == "__main__":
     print(chessBoardCellColor("H8", "B3"))
-    x = is_color(turn_letter_to_number("H"), 8)
-    y = is_color(turn_letter_to_number("B"), 3)
-    print(x, y)
-    print(x == y)
